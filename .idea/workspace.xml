@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ffbe5a-330c-440b-931a-a08305aab81a" name="Changes" comment="Test and adding our library for anaconda">
+      <change afterPath="$PROJECT_DIR$/Main2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Main3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Main4.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/Hello.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -43,20 +51,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Hello.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/90538/Documents/GitHub/Brain-Tumor-Detection&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Brain_Tumor_Classification.executor": "Run",
+    "Python.Hello.executor": "Run",
+    "Python.Main.executor": "Run",
+    "Python.Main3.executor": "Run",
+    "Python.Main4.executor": "Run",
+    "Python.Preprocessing.executor": "Run",
+    "Python.fighare-image-extractor.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/90538/Documents/GitHub/Brain-Tumor-Detection",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\90538\Documents\GitHub\Brain-Tumor-Detection" />
@@ -83,6 +97,14 @@
       <updated>1741690177981</updated>
       <workItem from="1741690178937" duration="3484000" />
       <workItem from="1741694779331" duration="1040000" />
+      <workItem from="1742128997078" duration="1284000" />
+      <workItem from="1742145918172" duration="1266000" />
+      <workItem from="1742286364427" duration="58000" />
+      <workItem from="1742292583717" duration="7801000" />
+      <workItem from="1742371839843" duration="1050000" />
+      <workItem from="1742372980114" duration="3472000" />
+      <workItem from="1742376823674" duration="73000" />
+      <workItem from="1742376907231" duration="2549000" />
     </task>
     <task id="LOCAL-00001" summary="Test and adding our library for anaconda">
       <option name="closed" value="true" />
@@ -110,7 +132,24 @@
     <MESSAGE value="Test and adding our library for anaconda" />
     <option name="LAST_COMMIT_MESSAGE" value="Test and adding our library for anaconda" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
+          <url>notebook://C:/Users/90538/Documents/GitHub/Brain-Tumor-Detection/brain-tumor-mri-classifier-main/BrainTumor.ipynb</url>
+          <line>141</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Brain_Tumor_Detection$Hello.coverage" NAME="Hello Coverage Results" MODIFIED="1741692812519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Brain_Tumor_Detection$Brain_Tumor_Classification.coverage" NAME="Brain_Tumor_Classification Coverage Results" MODIFIED="1742375275091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Brain-Tumor-MRI-Classification-main" />
+    <SUITE FILE_PATH="coverage/Brain_Tumor_Detection$Main.coverage" NAME="Main Coverage Results" MODIFIED="1742292760463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Brain_Tumor_Detection$Main3.coverage" NAME="Main3 Coverage Results" MODIFIED="1742376985426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Brain_Tumor_Detection$Preprocessing.coverage" NAME="Preprocessing Coverage Results" MODIFIED="1742300721102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Brain-Tumor-MRI-Classification-main" />
+    <SUITE FILE_PATH="coverage/Brain_Tumor_Detection$fighare_image_extractor.coverage" NAME="fighare-image-extractor Coverage Results" MODIFIED="1742300771401" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Brain-Tumor-MRI-Classification-main" />
+    <SUITE FILE_PATH="coverage/Brain_Tumor_Detection$Main4.coverage" NAME="Main4 Coverage Results" MODIFIED="1742381097079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
