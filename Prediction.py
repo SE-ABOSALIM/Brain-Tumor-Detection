@@ -5,9 +5,9 @@ import cv2
 from PIL import Image
 from tensorflow.keras.models import load_model
 
-model = load_model("C:/Users/90538/Documents/GitHub/Brain-Tumor-Detection/cnn_brain_tumor_model.h5")
+model = load_model("Brain-Tumor-Detection/cnn_brain_tumor_model.h5")
 
-print("Modelin Beklediği Giriş Şekli:", model.input_shape)
+print("Expected Input Format:", model.input_shape)
 
 _, image_size, _, channels = model.input_shape
 
@@ -17,7 +17,7 @@ def process_image(image):
     if isinstance(image, np.ndarray):
         img = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     else:
-        raise ValueError("Beklenmeyen giriş formatı!")
+        raise ValueError("Unexpected Format!")
 
     img = cv2.bilateralFilter(img, 2, 50, 50)
     img = cv2.resize(img, (image_size, image_size))
@@ -27,7 +27,7 @@ def process_image(image):
 
     return img
 
-img_url = 'https://raw.githubusercontent.com/SE-ABOSALIM/Brain-Tumor-Detection/refs/heads/main/cleaned-Dataset/Testing/notumor/Te-no_0035.jpg'
+img_url = 'https://raw.githubusercontent.com/SE-ABOSALIM/Brain-Tumor-Detection/refs/heads/main/Dataset/Testing/pituitary/Te-pi_0015.jpg'
 response = requests.get(img_url, stream=True)
 
 img = Image.open(response.raw)
@@ -46,5 +46,5 @@ predicted_class = np.argmax(prediction, axis=1)[0]
 predicted_label = labels[predicted_class]
 confidence = prediction[0][predicted_class]
 
-print(f"Modelin Tahmini: {predicted_label} (Sınıf: {predicted_class})")
-print(f"Güven Oranı: {confidence*100:.2f}%")
+print(f"Predicted Label: {predicted_label} (Class: {predicted_class})")
+print(f"Confidence: {confidence*100:.2f}%")
