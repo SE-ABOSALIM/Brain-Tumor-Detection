@@ -1,5 +1,5 @@
 '''
-FOR COLLAB:
+FOR GOOGLE COLAB:
 !git clone https://github.com/SE-ABOSALIM/Brain-Tumor-Detection.git
 !ls Brain-Tumor-Detection
 !ls -R Brain-Tumor-Detection/cleaned-Dataset/
@@ -28,14 +28,12 @@ from tensorflow.keras.optimizers import Adam
 
 np.random.seed(0)
 
-# إعداد المسارات
-dataset_path = "C:/Users/90538/Documents/GitHub/Brain-Tumor-Detection/cleaned-Dataset"
+dataset_path = "Brain-Tumor-Detection/Dataset"
 train_path = os.path.join(dataset_path, "Training")
 test_path = os.path.join(dataset_path, "Testing")
 labels = ['glioma', 'meningioma', 'notumor', 'pituitary']
 image_size = 150
 
-# Helper function to load and process images
 def process_image(img_path):
     img = cv2.imread(img_path, 0)
     img = cv2.bilateralFilter(img, 2, 50, 50)
@@ -43,17 +41,14 @@ def process_image(img_path):
     img = cv2.resize(img, (image_size, image_size))
     return img
 
-# تحميل الصور وتصنيفها
 x_train, y_train, x_test, y_test = [], [], [], []
 
-# تعريف حجم الصورة
-train_datagen = ImageDataGenerator(rescale=1./255, validation_split=0.2)  # تقسيم البيانات إلى تدريب واختبار داخلي
+train_datagen = ImageDataGenerator(rescale=1./255, validation_split=0.2)
 test_datagen = ImageDataGenerator(rescale=1./255)
 
 for label in labels:
     category_index = labels.index(label)
 
-    # تدريب
     train_folder = os.path.join(train_path, label)
     for file in tqdm(os.listdir(train_folder), desc=f"Training - {label}"):
         img = cv2.imread(os.path.join(train_folder, file), 0)
@@ -62,7 +57,6 @@ for label in labels:
         img = cv2.resize(img, (image_size, image_size))
         x_train.append(img)
         y_train.append(category_index)
-
 
     test_folder = os.path.join(test_path, label)
     for file in tqdm(os.listdir(test_folder), desc=f"Testing - {label}"):
@@ -73,26 +67,21 @@ for label in labels:
         x_test.append(img)
         y_test.append(category_index)
 
-# تحويل الصور إلى numpy arrays وتطبيعها
 x_train = np.array(x_train) / 255.0
 x_test = np.array(x_test) / 255.0
 
-# Veri setini eğitim, test ve doğrulama setlerine ayırma
 x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size=0.1, random_state=42)
 x_train, x_valid, y_train, y_valid = train_test_split(x_train, y_train, test_size=0.1, random_state=42)
 
-# تحويل التصنيفات إلى one-hot
 y_train = to_categorical(y_train, num_classes=4)
 y_test = to_categorical(y_test, num_classes=4)
 
-# إعداد مولد البيانات لتحميل الصور وتصنيفها تلقائيًا
 img_size = (150, 150)
 batch_size = 32
 
-# تدريب و اختبار
 train_datagen = ImageDataGenerator(
     rescale=1./255,
-    validation_split=0.2  # تحديد 20% من البيانات لتكون للتحقق
+    validation_split=0.2
 )
 
 test_datagen = ImageDataGenerator(rescale=1./255)
@@ -102,7 +91,7 @@ train_generator = train_datagen.flow_from_directory(
     target_size=img_size,
     batch_size=batch_size,
     class_mode='categorical',
-    subset='training'  # تحديد جزء التدريب
+    subset='training'
 )
 
 validation_generator = train_datagen.flow_from_directory(
@@ -110,10 +99,9 @@ validation_generator = train_datagen.flow_from_directory(
     target_size=img_size,
     batch_size=batch_size,
     class_mode='categorical',
-    subset='validation'  # تحديد جزء التحقق
+    subset='validation'
 )
 
-# توليد بيانات الاختبار باستخدام ImageDataGenerator
 test_generator = test_datagen.flow_from_directory(
     test_path,
     target_size=img_size,
@@ -124,7 +112,6 @@ test_generator = test_datagen.flow_from_directory(
 print(x_train.shape)
 print(x_test.shape)
 
-# عرض بعض الصور للتأكيد
 fig, axes = plt.subplots(10, 7, figsize=(10, 10))
 for i, ax in enumerate(axes.flatten()):
     ax.imshow(x_train[i])
@@ -132,7 +119,6 @@ for i, ax in enumerate(axes.flatten()):
 plt.tight_layout()
 plt.show()
 
-# إنشاء نموذج CNN
 def create_model():
     model = Sequential()
     model.add(Conv2D(32, (3, 3), input_shape=(image_size, image_size, 3), activation='relu'))
@@ -167,7 +153,6 @@ def create_model():
     model.compile(optimizer=Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
     return model
 
-# إنشاء النموذج
 model = create_model()
 model.summary()
 
@@ -181,17 +166,18 @@ datagen.fit(x_train)
 
 history = model.fit(
     datagen.flow(x_train, y_train, batch_size=64),
-    validation_data=validation_generator,  # استخدم validation_generator هنا
+    validation_data=validation_generator,
     epochs=45,
     steps_per_epoch=len(x_train) // 32
 )
 
-# تقييم النموذج
-score = model.evaluate(x_test, y_test, verbose=0)
-print("✅ Test Loss:", score[0])
-print("✅ Test Accuracy:", score[1])
+score = model.evaluate(x_train, y_train, verbose=0)
+train_loss = score[0] * 100
+train_accuracy = score[1] * 100
 
-# رسم الأداء
+print(f"Training Loss: {train_loss:.2f}%")
+print(f"Training Accuracy: {train_accuracy:.2f}%")
+
 plt.plot(history.history['accuracy'], label='Training Accuracy')
 plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
 plt.title('Model Accuracy')
@@ -208,53 +194,42 @@ plt.ylabel('Loss')
 plt.legend()
 plt.show()
 
-# اختيار صورة عشوائية من مجموعة الاختبار
 random_index = np.random.randint(0, len(x_test))
 random_img = x_test[random_index]
 
-# تأكد من أن الصورة بحجم 150x150 بكسل
 random_img_resized = cv2.resize(random_img, (150, 150))
 
-# تطبيع الصورة
 random_img_resized = random_img_resized / 255.0
 
-# إجراء التنبؤ
 predictions = model.predict(random_img_resized.reshape(1, 150, 150, 3))
 predicted_class = np.argmax(predictions)
 predicted_label = labels[predicted_class]
 confidence = predictions[0][predicted_class]
 
-# الحصول على التسمية الفعلية
 actual_index = y_test[random_index]
 actual_class = np.argmax(actual_index)
 actual_label = labels[actual_class]
 
-# طباعة النتائج
 print(f"Predicted label: {predicted_label} \nActual label: {actual_label} \nConfidence: {confidence*100:.2f}%\n")
 plt.figure(figsize=(3, 3))
 plt.imshow(random_img)
 plt.axis('off')
 plt.show()
 
-# عند استخدام التنبؤ:
-random_index = np.random.randint(0, len(x_test))  # اختيار صورة عشوائية
-random_img = x_test[random_index]  # الصورة عشوائيًا من مجموعة الاختبار
+random_index = np.random.randint(0, len(x_test))
+random_img = x_test[random_index]
 
-# تأكد من أن الصورة بحجم 150x150 بكسل وتطبيعها:
 random_img_resized = cv2.resize(random_img, (150, 150))
 random_img_resized = random_img_resized / 255.0
 
-# التنبؤ:
 predictions = model.predict(random_img_resized.reshape(1, 150, 150, 3))
 predicted_class = np.argmax(predictions)
 predicted_label = labels[predicted_class]
 confidence = predictions[0][predicted_class]
 
-# الحصول على التصنيف الفعلي من y_test (التصنيف الفعلي هو الذي تم تطبيقه عليها One-Hot)
-actual_index = np.argmax(y_test[random_index])  # استخراج التصنيف الفعلي
-actual_label = labels[actual_index]  # اسم الفئة الفعلية
+actual_index = np.argmax(y_test[random_index])
+actual_label = labels[actual_index]
 
-# عرض النتائج:
 print(f"Predicted label: {predicted_label} \nActual label: {actual_label} \nConfidence: {confidence*100:.2f}%\n")
 plt.figure(figsize=(3, 3))
 plt.imshow(random_img)
@@ -266,8 +241,11 @@ print("Test loss:", score[0])
 print("Test accuracy:", score[1])
 
 score = model.evaluate(x_test, y_test)
-print("Test Loss:", score[0])
-print("Test Accuracy:", score[1])
+test_loss = score[0] * 100
+test_accuracy = score[1] * 100
+
+print(f"Test Loss: {test_loss:.2f}%")
+print(f"Test Accuracy: {test_accuracy:.2f}%")
 
 model.save("cnn_brain_tumor_model.h5")
-print("✅ Model saved as cnn_brain_tumor_model.h5")
+print("Model saved as cnn_brain_tumor_model.h5")
